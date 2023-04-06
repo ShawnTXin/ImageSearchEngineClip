@@ -2,14 +2,14 @@ import streamlit as st
 import numpy as np
 from sentence_transformers import SentenceTransformer
 import pandas as pd 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os  
 #import cv2
-import torch
+#import torch
 import requests
 from PIL import Image
 from io import BytesIO
-from sklearn.metrics.pairwise import cosine_similarity
+#from sklearn.metrics.pairwise import cosine_similarity
 
 
 # Define list of available models
