@@ -3,9 +3,8 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 import pandas as pd 
 #import matplotlib.pyplot as plt
-import os  
-#import cv2
-#import torch
+#import os  
+
 import requests
 from PIL import Image
 from io import BytesIO
