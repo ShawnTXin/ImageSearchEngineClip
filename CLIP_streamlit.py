@@ -2,26 +2,19 @@ import streamlit as st
 import numpy as np
 from sentence_transformers import SentenceTransformer
 import pandas as pd 
-#import matplotlib.pyplot as plt
-#import os  
-
 import requests
 from PIL import Image
 from io import BytesIO
-#from sklearn.metrics.pairwise import cosine_similarity
-
 
 # Define list of available models
 applications = ["Image Search By Text", "Image Search By Image"]
 
-# Define dataset of sentences for MPNet
+# Define dataset of sentences for CLIP Embeddings
 file_path_clip = "data/df_clip_embeddings.csv"
 df_clip= pd.read_csv(file_path_clip)
-#df_mpnet['embeddings '] = df_mpnet['embeddings '].apply(ast.literal_eval)
 
-# Define dataset of sentences for MPNet
-#DOCUMENTS_EMBEDDINGS_PATH = "data"  # a folder with all the documents embeddings. within this folder, one csv file include multiple documents embedding of the same run
-#COLUMN_EMBEDDINGS = "embedding"  # the embedding column name in the documents embedding file.
+# Define the CLIP model
+
 model = SentenceTransformer('clip-ViT-B-32')
 
 # Set up Streamlit app
@@ -36,12 +29,9 @@ def cosine_similarity_clip(a,b):
 
 application_choice = st.selectbox("Choose an option:", applications)
 # Calculate embeddings and get similar sentences
-#if st.button("Enter"):
 if application_choice=="Image Search By Text":
     # Replace with code to load selected model
     desired_input = st.text_input("Enter a text query:")
-    #if st.button("Find Related Photos:"):
-
 
 elif application_choice=="Image Search By Image":
     st.write("Please select an image file")
@@ -51,9 +41,8 @@ elif application_choice=="Image Search By Image":
         image_bytes = uploaded.read()
         image = BytesIO(image_bytes)
         desired_input = Image.open(image)
-        #st.write("type",desired_input)
+        
     
-
 
 if desired_input:
     input_vector = np.array(model.encode(desired_input))
