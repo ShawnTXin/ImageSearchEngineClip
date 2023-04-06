@@ -3,5 +3,3 @@ pandas==1.5.3
 streamlit==1.19.0
 sentence_transformers
 requests
-PIL
-io
