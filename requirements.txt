@@ -4,4 +4,3 @@ streamlit==1.19.0
 sentence_transformers
 requests
 pillow
-io
