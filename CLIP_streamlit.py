@@ -13,7 +13,7 @@ applications = ["Image Search By Text", "Image Search By Image"]
 @st.cache(hash_funcs={"MyUnhashableClass": lambda _: None})
 def get_df_clip_embeddings(sheets_url):
     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
-    return pd.read_csv(csv_url)
+    return pd.read_csv(csv_url, on_bad_lines='skip')
 
 df_clip = get_df_clip_embeddings(st.secrets["google_sheet_url"])
 
