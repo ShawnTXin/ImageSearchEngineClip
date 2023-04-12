@@ -58,12 +58,18 @@ if desired_input:
     input_vector = np.array(model.encode(desired_input))
     similarity_scores =  [cosine_similarity_clip(input_vector,np.fromstring(embedding[1:-1], sep=' ')) for embedding in df_clip['img_embeddings'].tolist()]
     top_3_indices = np.argsort(-np.array(similarity_scores))[:3]
+    #print(similarity_scores[top_3_indices[0]])
+    #print(similarity_scores[top_3_indices[1]])
+    #print(similarity_scores[top_3_indices[2]])
     selected_rows = df_clip.loc[top_3_indices.tolist(), 'photo_image_url']
     for i,url in enumerate(selected_rows):
         st.write("Resulted Image Number",i+1,'is:\n')
         response = requests.get(url,stream=True)
         img = Image.open(BytesIO(response.content))
         st.image(img)
+
+        if similarity_scores[top_3_indices[i]] < 0.275:
+            st.write('The model is not confident with the this finding')
       
         
         
