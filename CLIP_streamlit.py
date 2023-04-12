@@ -68,7 +68,7 @@ if desired_input:
         img = Image.open(BytesIO(response.content))
         st.image(img)
         if similarity_scores[top_3_indices[i]] < 0.275:
-            st.write('The model is not confident with the this finding')
+            st.write('The search engine is not confident with this finding')
         st.markdown('---')
       
         
