@@ -10,12 +10,20 @@ from io import BytesIO
 applications = ["Image Search By Text", "Image Search By Image"]
 
 # Define dataset of sentences for CLIP Embeddings
-file_path_clip = "data/df_clip_embeddings.csv"
-df_clip= pd.read_csv(file_path_clip)
+@st.cache(hash_funcs={"MyUnhashableClass": lambda _: None})
+def get_df_clip_embeddings(sheets_url):
+    csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
+    return pd.read_csv(csv_url)
+
+df_clip = get_df_clip_embeddings(st.secrets["google_sheet_url"])
+
 
 # Define the CLIP model
-
-model = SentenceTransformer('clip-ViT-B-32')
+@st.cache(hash_funcs={"MyUnhashableClass": lambda _: None})
+def get_clip_model():
+    model = SentenceTransformer('clip-ViT-B-32')
+    return model
+model = get_clip_model()
 
 # Set up Streamlit app
 st.title("Image Search Engine")
