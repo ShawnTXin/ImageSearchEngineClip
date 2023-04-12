@@ -67,9 +67,9 @@ if desired_input:
         response = requests.get(url,stream=True)
         img = Image.open(BytesIO(response.content))
         st.image(img)
-
         if similarity_scores[top_3_indices[i]] < 0.275:
             st.write('The model is not confident with the this finding')
+        st.markdown('---')
       
         
         
